@@ -11,7 +11,6 @@ services:
     networks: 
     - ip6net
     ports:
-      - "1924:1924" # express default
       - "[::1]:3000:3000"
 
   mongo:
@@ -24,7 +23,6 @@ services:
     networks: 
       - ip6net
     ports:
-      - "2415:2415"
       - "[::1]:27017:27017"
 
 volumes:
