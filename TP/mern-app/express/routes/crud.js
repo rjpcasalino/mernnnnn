@@ -30,7 +30,7 @@ router.get('/', function(req, res) {
 });
   
 router.post('/', (req, res) => {
-    const { dbq, id, data } = req.query;
+    const { dbq, id, data } = req.body;
     if (!dbq || !id || !data) return res.status(400).send({ message: 'Invalid request' });
   
       const user = {

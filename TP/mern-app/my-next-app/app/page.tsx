@@ -1,16 +1,95 @@
 'use client'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 import './styles.css'
 
+async function getData(url) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
 
 function Counter() {
+  const [data, setData] = useState(null);
   const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = `http://[::1]:8080/crud?dbq=test&id=movies`;
+      const json = await getData(url);
+      if (json) {
+        setData(json);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const handleAddMovie = async (event) => {
+    event.preventDefault();
+    try {
+      const url = `http://[::1]:8080/crud`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          dbq: 'test',
+          id: 'movies',
+          data: 'New Movie Title!'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+  const handleButtonClick = async () => {
+    const newUrl = `http://[::1]:8080/crud?dbq=test&id=movies&data=""`;
+    try {
+      const response = await fetch(newUrl);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      setData(json);
+      setCount(count + 1);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <button onClick={() => setCount(count + 1)}>
-      You clicked me {count} times
-    </button>
+    <div>
+      <button onClick={handleButtonClick}>You clicked me {count} times</button>
+      {data && data.ExpressResponse.map(movie => (
+        <li key={self.crypto.randomUUID()}>{movie.data}</li>
+      ))}
+            <form onSubmit={handleAddMovie}>
+        <button type="submit">Add Movie</button>
+      </form>
+
+    </div>
   );
 }
+
 
 function Item({ name, isDone }) {
   return (
@@ -136,8 +215,6 @@ function Card({ children }) {
 }
 
 
-
-
 export default function ToDoList() {
   return (
     // only one parent allowed in jsx
@@ -145,7 +222,7 @@ export default function ToDoList() {
     <div>
     <Blog/>
      <Item isDone={true} name="Get Dockerfile sorta working with local dev" />
-     <Item isDone={false} name="Own a home"/>
+     <Item isDone={true} name="Own a home"/>
      <Card>
       <Avatar
         size={100}
