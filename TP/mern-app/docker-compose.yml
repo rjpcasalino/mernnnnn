@@ -1,5 +1,16 @@
 version: '3'
 services:
+  next:
+    build: ./my-next-app
+    depends_on:
+      - express
+    environment:
+      PORT: 3000
+
+    networks: 
+      - ip6net
+    ports:
+      - "[::1]:3000:3000"
   express:
     build: ./express
     depends_on:
@@ -7,11 +18,12 @@ services:
     environment:
       - MONGODB_URI=mongodb://root:example@mongo:27017/
       - DEBUG=app:*
+      - PORT=8080
 
     networks: 
     - ip6net
     ports:
-      - "[::1]:3000:3000"
+      - "[::1]:8080:8080"
 
   mongo:
     build: ./mongo

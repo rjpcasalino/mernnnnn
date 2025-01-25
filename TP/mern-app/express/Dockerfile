@@ -11,8 +11,8 @@ RUN npm install
 # Copy the current directory contents into the container at /app
 COPY . .
 
-# Expose port 3001 for the Express app to listen on
-EXPOSE 3001
+# Expose port 8080 for the Express app to listen on
+EXPOSE 8080
 # Set the command to start the Express app
 CMD ["npm", "start"]
 
