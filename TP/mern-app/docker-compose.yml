@@ -10,7 +10,7 @@ services:
     networks: 
       - ip6net
     ports:
-      - "[::1]:3000:3000"
+      - "3000:3000"
   express:
     build: ./express
     depends_on:
@@ -23,7 +23,7 @@ services:
     networks: 
     - ip6net
     ports:
-      - "[::1]:8080:8080"
+      - "8080:8080"
 
   mongo:
     build: ./mongo
@@ -35,7 +35,7 @@ services:
     networks: 
       - ip6net
     ports:
-      - "[::1]:27017:27017"
+      - "27017:27017"
 
 volumes:
   db-data:
