@@ -9,7 +9,8 @@ bash ./installnodejs.sh;
 source /root/.bashrc;
 nvm install 22.13.0;
 mkdir -p /root/my-next-app && cd /root/my-next-app;
-npm install next@latest react@latest react-dom@latest;
+npm install --save next@latest react@latest react-dom@latest;
+npm install --save tailwindcss @tailwindcss/postcss postcss;
 EOF
 
 ENV PATH="$PATH:/root/.nvm/versions/node/v22.13.0/bin/"
