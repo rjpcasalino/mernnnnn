@@ -5,8 +5,9 @@ ENV PATH="$PATH:/root/.nvm/versions/node/v22.13.0/bin/"
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=development
 
-COPY . /root/my-next-app
-WORKDIR /root/my-next-app
+RUN mkdir /app
+WORKDIR /app
+COPY package*.json ./
 
 RUN <<EOF
 microdnf install -y findutils tar vim
@@ -20,4 +21,4 @@ EOF
 
 EXPOSE 3000
 
-CMD [ "node", "/root/my-next-app/node_modules/next/dist/bin/next", "dev" ]
+CMD [ "node", "/app/node_modules/next/dist/bin/next", "dev" ]
