@@ -131,15 +131,6 @@ function Counter() {
 }
 
 
-function Item({ name, isDone }) {
-  return (
-    <li className="item">
-      {name} {isDone ? <FontAwesomeIcon icon={faCheck} /> : '❌'}
-    </li>
-  );
-}
-
-
  function MySearch() {
   function publish(formData) {
     const content = formData.get("content");
