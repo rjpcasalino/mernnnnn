@@ -1,5 +1,5 @@
 # Use an official MongoDB image as a base
-FROM mongo
+FROM mongodb/mongodb-community-server:latest
 
 # Expose port 27017 for MongoDB to listen on
 EXPOSE 27017
