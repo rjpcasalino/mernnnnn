@@ -19,6 +19,8 @@ function Index() {
     <>
       <FontAwesomeIcon icon={faThumbsDown} className="fa-fw" />
       <IndexNavbar fixed />
+
+
       <Footer />
     </>
   );
