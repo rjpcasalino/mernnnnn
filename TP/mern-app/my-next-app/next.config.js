@@ -4,8 +4,8 @@ const nextConfig = {
     // except for webpack, other parts are left as generated
     webpack: (config, context) => {
       config.watchOptions = {
-        poll: 1000,
-        aggregateTimeout: 300
+        //poll: 1000, only if wtaching doesn't work...
+        aggregateTimeout: 600
       }
       return config
     }

@@ -19,7 +19,8 @@
     "@fortawesome/react-fontawesome": "latest",
     "@fortawesome/free-solid-svg-icons": "latest",
     "styled-components": "latest",
-    "@primer/react": "latest"
+    "@primer/react": "latest",
+    "@primer/primitives": "latest"
   },
   "devDependencies": {
     "@types/node": "20.10.8",

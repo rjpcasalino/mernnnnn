@@ -1,41 +1,101 @@
 "use client";
 
-import {Box, FormControl, Button} from '@primer/react'
-import {Flash} from '@primer/react'
-import {TabNav} from '@primer/react/deprecated'
-import {Textarea} from '@primer/react'
+import {ThemeProvider, BaseStyles} from '@primer/react';
+
+import {TabNav} from '@primer/react/deprecated';
+import {Button, Dialog, Text, ToggleSwitch} from '@primer/react';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faThumbsDown, faThumbsUp, faCheck } from '@fortawesome/free-solid-svg-icons';
+
+import { useState, useRef, useCallback } from "react";
+import "./styles.css";
 
 
-import {ThemeProvider, BaseStyles} from '@primer/react'
 
-function Fuck() {
+function RetrunTabNav() {
   return (
-    <TabNav aria-label="Main">
-    <TabNav.Link href="#" selected>
-      Home
-    </TabNav.Link>
-    <TabNav.Link href="#">Documentation</TabNav.Link>
-    <TabNav.Link href="#">Support</TabNav.Link>
-  </TabNav>
+      <TabNav aria-label="Main">
+      <TabNav.Link href="#" selected>
+        <FontAwesomeIcon icon={faThumbsDown} className="fa-fw" />
+      </TabNav.Link>
+      <TabNav.Link href="#">
+        <FontAwesomeIcon icon={faThumbsUp} className="fa-fw" />
+        </TabNav.Link>
+      <TabNav.Link href="#">xXx: the movie</TabNav.Link>
+    </TabNav>
   );
-};
+}
+
+function ReturnToggleSwitch() {
+  return (
+  <>
+    <Text id="toggle" fontWeight="bold" fontSize={1}>
+      Power?
+    </Text>
+    <ToggleSwitch aria-labelledby="toggle" />
+  </>
+  );
+}
+
+function ReturnDialog() {
+    const [isOpen, setIsOpen] = useState(false)
+    const [secondOpen, setSecondOpen] = useState(false)
+    const buttonRef = useRef<HTMLButtonElement>(null)
+    const onDialogClose = useCallback(() => setIsOpen(false), [])
+    const onSecondDialogClose = useCallback(() => setSecondOpen(false), [])
+    const openSecondDialog = useCallback(() => setSecondOpen(true), [])
+    return (
+      <>
+        <Button ref={buttonRef} onClick={() => setIsOpen(!isOpen)}>
+          Show dialog
+        </Button>
+        {isOpen && (
+          <Dialog
+            title="Lazy Pizza Life"
+            onClose={onDialogClose}
+            footerButtons={[
+              {
+                buttonType: 'default',
+                content: 'Are U Sure?',
+                onClick: openSecondDialog,
+              },
+              {
+                buttonType: 'danger',
+                content: 'Jumpship',
+                onClick: onDialogClose,
+              },
+              {
+                buttonType: 'primary',
+                content: 'Proceed',
+                onClick: openSecondDialog,
+              },
+            ]}
+          >
+            "kibble and bits"
+            {secondOpen && (
+              <Dialog
+                title="Inner dialog!"
+                onClose={onSecondDialogClose}
+                width="small"
+              >
+                OK, here we go!
+              </Dialog>
+            )}
+          </Dialog>
+        )}
+      </>
+    )
+  };
 
 export default function IndexPage() {
   return (
     <ThemeProvider>
-    <BaseStyles>
     <div>
-    <Fuck/>
-    <Button>Hello world</Button>
-    <Flash>I hate JavaScript</Flash>
-    <Box as="form">
-    <FormControl>
-      <FormControl.Label>Default label</FormControl.Label>
-      <Textarea />
-    </FormControl>
-  </Box>
+      <RetrunTabNav/>
+      <ReturnToggleSwitch/>
+      <ReturnDialog/>
     </div>
-    </BaseStyles>
-  </ThemeProvider>
+    </ThemeProvider>
   );
-}
+};

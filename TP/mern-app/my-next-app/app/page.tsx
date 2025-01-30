@@ -1,30 +1,15 @@
 /* eslint-disable react/jsx-no-target-blank */
 "use client";
 import React from "react";
-import Link from "next/link";
 import Image from "next/image";
 
-import IndexNavbar from "/app/components/Navbars/IndexNavbar.js";
-import Footer from "/app/components/Footers/Footer.js";
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbsDown, faCheck } from '@fortawesome/free-solid-svg-icons'
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import {Button} from '@primer/react'
 
 import { useState, useEffect } from "react";
 
 import "./styles.css";
-
-function Index() {
-  return (
-    <>
-      <FontAwesomeIcon icon={faThumbsDown} className="fa-fw" />
-      <IndexNavbar fixed />
-
-
-      <Footer />
-    </>
-  );
-}
 
 
 async function getData(url) {
@@ -133,7 +118,7 @@ function Counter() {
 
   return (
     <div>
-      <button onClick={handleButtonClick}>You clicked me {count} times</button>
+      <Button variant="danger" onClick={handleButtonClick}>You clicked me {count} times</Button>
       {data && data.ExpressResponse.map(movie => (
         <li key={self.crypto.randomUUID()}>{movie.data}</li>
       ))}
@@ -211,36 +196,6 @@ function MyForm() {
   );
 }
 
-function Blog() {
-  return (
-    <>
-      <Post title="An update" body="It's been a while since I posted..." />
-      <Post title="My new blog" body="I am starting a new blog!" />
-    </>
-  )
-}
-
-function Post({ title, body }) {
-  return (
-    <>
-      <PostTitle title={title} />
-      <PostBody body={body} />
-    </>
-  );
-}
-
-function PostTitle({ title }) {
-  return  <h1 className="text-3xl font-bold underline">{title}</h1>
-}
-
-function PostBody({ body }) {
-  return (
-    <article>
-      <p>{body}</p>
-    </article>
-  );
-}
-
 function getImageUrl(person, size = 's') {
   return (
     'https://i.imgur.com/' +
@@ -277,7 +232,6 @@ function ReturnAngular() {
   return <Angular alt="A portrait" />
 }
 
-
 export default function ToDoList() {
   return (
     // only one parent allowed in jsx
@@ -297,7 +251,6 @@ export default function ToDoList() {
      <MySearch/>
      <Counter/>
      <ColorBagdes/>
-     <Index/>
     </div>
   );
 }
