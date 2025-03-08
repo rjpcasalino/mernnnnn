@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-no-target-blank */
 "use client";
 import React from "react";
+import { Suspense } from 'react';
 import Image from "next/image";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import {Button} from '@primer/react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import {Button} from '@primer/react';
 
 import { useState, useEffect } from "react";
 
@@ -116,12 +117,19 @@ function Counter() {
     }
   };
 
+  function Loading() {
+    return <h2>🌀 Loading...</h2>;
+  }
+
   return (
     <div>
       <Button variant="danger" onClick={handleButtonClick}>You clicked me {count} times</Button>
+
+      <Suspense fallback={<Loading />}>
       {data && data.ExpressResponse.map(movie => (
         <li key={self.crypto.randomUUID()}>{movie.data}</li>
       ))}
+      </Suspense>
             <form onSubmit={handleAddMovie}>
         <button type="submit">Add Movie</button>
       </form>
@@ -223,26 +231,27 @@ function ReturnAngular() {
   return <Angular alt="A portrait" />
 }
 
+
 export default function ToDoList() {
   return (
     // only one parent allowed in jsx
     // <Item name="Nope" isDone="false"/> // example of bad way to do what's done below 
-    <div>
-     <Card>
-      <ReturnAngular/>
-      <Avatar
-        size={100}
-        person={{ 
-          name: 'Katsuko Saruhashi',
-          imageId: 'YfeOqp2'
-        }}
-      />
-    </Card>
-     <MyForm />
-     <MySearch/>
-     <Counter/>
-     <ColorBagdes/>
-    </div>
+    <>
+            <Card>
+              <ReturnAngular/>
+              <Avatar
+                size={100}
+                person={{ 
+                  name: 'Katsuko Saruhashi',
+                  imageId: 'YfeOqp2'
+                }}
+              />
+            </Card>
+            <MyForm />
+            <MySearch/>
+            <Counter/>
+            <ColorBagdes/>
+    </>
   );
 }
 

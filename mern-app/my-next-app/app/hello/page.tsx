@@ -1,10 +1,8 @@
 "use client";
 
-import {ThemeProvider, BaseStyles} from '@primer/react';
-
-import {TabNav} from '@primer/react/deprecated';
-import {Button, Dialog, Text, ToggleSwitch} from '@primer/react';
-
+import { ThemeProvider, BaseStyles } from '@primer/react';
+import { TabNav} from '@primer/react/deprecated';
+import { Button, Dialog, Text, ToggleSwitch } from '@primer/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp, faCheck } from '@fortawesome/free-solid-svg-icons';
 
@@ -91,11 +89,9 @@ function ReturnDialog() {
 export default function IndexPage() {
   return (
     <ThemeProvider>
-    <div>
       <RetrunTabNav/>
       <ReturnToggleSwitch/>
       <ReturnDialog/>
-    </div>
     </ThemeProvider>
   );
 };
