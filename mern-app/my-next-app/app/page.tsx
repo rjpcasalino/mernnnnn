@@ -22,35 +22,26 @@ async function getData(url) {
   }
 }
 
-function ColorBagdes() {
+import Badge from 'react-bootstrap/Badge';
+import Stack from 'react-bootstrap/Stack';
+
+function VariationsExample() {
   return (
-    <>
-      <span className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-red-600/10 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-yellow-600/20 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-green-600/20 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-indigo-700/10 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-purple-700/10 ring-inset">
-        Badge
-      </span>
-      <span className="inline-flex items-center rounded-md bg-pink-50 px-2 py-1 text-xs font-medium text-pink-700 ring-1 ring-pink-700/10 ring-inset">
-        Badge
-      </span>
-    </>
-  )
+    <Stack direction="horizontal" gap={2}>
+      <Badge bg="primary">Primary</Badge>
+      <Badge bg="secondary">Secondary</Badge>
+      <Badge bg="success">Success</Badge>
+      <Badge bg="danger">Danger</Badge>
+      <Badge bg="warning" text="dark">
+        Warning
+      </Badge>
+      <Badge bg="info">Info</Badge>
+      <Badge bg="light" text="dark">
+        Light
+      </Badge>
+      <Badge bg="dark">Dark</Badge>
+    </Stack>
+  );
 }
 
 function Counter() {
@@ -119,8 +110,8 @@ function Counter() {
       {data && data.ExpressResponse.map(movie => (
         <li key={self.crypto.randomUUID()}>{movie.data}</li>
       ))}
-            <form onSubmit={handleAddMovie}>
-        <Button type="submit">Add Movie</Button>
+      <form onSubmit={handleAddMovie}>
+        <Button variant="secondary" type="submit">Add Movie</Button>
       </form>
 
     </div>
@@ -143,9 +134,10 @@ function Counter() {
   return (
     <form action={publish}>
       <textarea name="content" rows={4} cols={40} />
-      <br />
-      <Button type="submit" name="button" value="submit">Publish</Button>
-      <Button formAction={save}>Save draft</Button>
+      <br/>
+      <Button variant="secondary" type="submit" name="button" value="submit">Publish</Button>
+      <br/>
+      <Button variant="secondary" type="submit" formAction={save}>Save draft</Button>
     </form>
   );
 }
@@ -173,7 +165,7 @@ function MyForm() {
           onChange={e => setAge(e.target.value)}
           type="number"
         />
-        <Button onClick={() => setAge(ageAsNumber + 10)}>
+        <Button variant="secondary" onClick={() => setAge(ageAsNumber + 10)}>
           Add 10 years
         </Button>
       </label>
@@ -242,6 +234,7 @@ export default function ToDoList() {
             <MyForm />
             <MySearch/>
             <Counter/>
+            <VariationsExample/>
     </>
   );
 }

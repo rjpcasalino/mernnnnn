@@ -4,11 +4,16 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 config.autoAddCss = true;
 
-
+// Bootstrap
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+
+import Link from 'next/link';
+
 
 function BasicExample() {
   return (
@@ -18,10 +23,11 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/hello">Hello</Nav.Link>
-            <Nav.Link href="/todos">Todos</Nav.Link>
-
+            {/* see  https://stackoverflow.com/questions/57564244/linking-a-bootstrap-navbar-correctly-with-nextjs */}
+            <Nav.Link as={Link} href="/">Home</Nav.Link>
+            <Nav.Link as={Link} href="/hello">Hello</Nav.Link>
+            <Nav.Link as={Link} href="/todos">Todos</Nav.Link>
+                
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
@@ -41,25 +47,24 @@ function BasicExample() {
 }
 
 
-
-import { usePathname } from 'next/navigation'
-import Link from 'next/link';
-
 export default function DashboardLayout({
   children
 }: {
   children: React.ReactNode
 }) {
-  const pathname = usePathname()
 
   return (
     <html lang="en">
       <body data-color-mode="light" data-light-theme="light" data-dark-theme="dark">
         {/* Layout UI */
-          <BasicExample/> 
+         <BasicExample/>
         }
         {/* Place children where you want to render a page or nested layout */}
-        <main>{children}</main>
+        <Container fluid="md">
+          <Row>
+            <Col><main>{children}</main></Col>
+          </Row>
+        </Container>
       </body>
     </html>
   )
