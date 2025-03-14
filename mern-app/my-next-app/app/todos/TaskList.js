@@ -6,9 +6,9 @@ import {Box, Button} from '@primer/react'
 
 function TaskItem({ name, isDone }) {
   return (
-    <li className="item">
+    <p className="item">
       {name} {isDone ? <FontAwesomeIcon icon={faCheck} /> : '❌'}
-    </li>
+    </p>
   );
 }
 

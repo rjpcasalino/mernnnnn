@@ -1,16 +1,11 @@
 /* eslint-disable react/jsx-no-target-blank */
 "use client";
 import React from "react";
-import { Suspense } from 'react';
 import Image from "next/image";
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
-import {Button} from '@primer/react';
 
 import { useState, useEffect } from "react";
 
-import "./styles.css";
+import Button from 'react-bootstrap/Button';
 
 
 async function getData(url) {
@@ -117,21 +112,15 @@ function Counter() {
     }
   };
 
-  function Loading() {
-    return <h2>🌀 Loading...</h2>;
-  }
-
   return (
     <div>
-      <Button variant="danger" onClick={handleButtonClick}>You clicked me {count} times</Button>
+      <Button variant="primary" onClick={handleButtonClick}>You clicked me {count} times</Button>
 
-      <Suspense fallback={<Loading />}>
       {data && data.ExpressResponse.map(movie => (
         <li key={self.crypto.randomUUID()}>{movie.data}</li>
       ))}
-      </Suspense>
             <form onSubmit={handleAddMovie}>
-        <button type="submit">Add Movie</button>
+        <Button type="submit">Add Movie</Button>
       </form>
 
     </div>
@@ -155,8 +144,8 @@ function Counter() {
     <form action={publish}>
       <textarea name="content" rows={4} cols={40} />
       <br />
-      <button type="submit" name="button" value="submit">Publish</button>
-      <button formAction={save}>Save draft</button>
+      <Button type="submit" name="button" value="submit">Publish</Button>
+      <Button formAction={save}>Save draft</Button>
     </form>
   );
 }
@@ -181,9 +170,9 @@ function MyForm() {
           onChange={e => setAge(e.target.value)}
           type="number"
         />
-        <button onClick={() => setAge(ageAsNumber + 10)}>
+        <Button onClick={() => setAge(ageAsNumber + 10)}>
           Add 10 years
-        </button>
+        </Button>
       </label>
       {firstName !== '' &&
         <p>Your name is {firstName}.</p>
@@ -250,7 +239,6 @@ export default function ToDoList() {
             <MyForm />
             <MySearch/>
             <Counter/>
-            <ColorBagdes/>
     </>
   );
 }

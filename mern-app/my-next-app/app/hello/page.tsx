@@ -7,21 +7,26 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 import { useState, useRef, useCallback } from "react";
+
 import "./styles.css";
 
+import { css } from '@emotion/react';
 
+const color = 'white'
 
 function RetrunTabNav() {
   return (
+    <>
       <TabNav aria-label="Main">
-      <TabNav.Link href="#" selected>
-        <FontAwesomeIcon icon={faThumbsDown} className="fa-fw" />
+      <TabNav.Link href="/" selected>
+        <FontAwesomeIcon icon={faThumbsDown} className="fa-fw" /> Home
       </TabNav.Link>
-      <TabNav.Link href="#">
-        <FontAwesomeIcon icon={faThumbsUp} className="fa-fw" />
+      <TabNav.Link href="/hello">
+        <FontAwesomeIcon icon={faThumbsUp} className="fa-fw" /> Hello
         </TabNav.Link>
-      <TabNav.Link href="#">xXx: the movie</TabNav.Link>
+      <TabNav.Link href="/todos">Todos</TabNav.Link>
     </TabNav>
+    </>
   );
 }
 
