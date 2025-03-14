@@ -152,7 +152,10 @@ function Counter() {
 
 function MyForm() {
   const [firstName, setFirstName] = useState('');
-  const [age, setAge] = useState('20');
+  // const [age, setAge] = useState("20"); // effing n00b
+  // https://dev.to/dwjohnston/react-usestate-argument-of-type-string-is-not-assignable-to-parameter-of-type-setstateaction-undefined-27po
+  // https://stackoverflow.com/questions/70926039/type-number-is-not-assignable-to-type-setstateactionundefined-react/70926350#70926350
+  const [age, setAge] = React.useState<string | number>("0"); 
   const ageAsNumber = Number(age);
   return (
     <>
