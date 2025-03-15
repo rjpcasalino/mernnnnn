@@ -8,6 +8,78 @@ import { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button';
 
 
+import { Container, Form } from 'react-bootstrap';
+
+const MongoDbForm = () => {
+  const [dbq, setDbq] = useState('');
+  const [id, setId] = useState('');
+  const [data, setData] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!dbq || !id || !data) return alert('Please fill all fields');
+
+    try {
+      const response = await fetch(`http://[::1]:8080/crud`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ dbq, id, data }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        throw new Error('Network request failed');
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  return (
+    <>
+    <Container className="mt-5">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="dbq">
+          <Form.Label> DBQ</Form.Label>
+          <Form.Control
+            type="text"
+            value={dbq}
+            onChange={(event) => setDbq(event.target.value)}
+            placeholder="DBQ"
+          />
+        </Form.Group>
+
+
+        <Form.Group controlId="id">
+          <Form.Label> ID</Form.Label>
+          <Form.Control
+            type="text"
+            value={id}
+            onChange={(event) => setId(event.target.value)}
+            placeholder="ID"
+          />
+        </Form.Group>
+
+        <Form.Group controlId="data">
+          <Form.Label> Data</Form.Label>
+          <Form.Control
+            type="text"
+            value={data}
+            onChange={(event) => setData(event.target.value)}
+            placeholder="Data"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          Submit
+        </Button>
+      </Form>
+    </Container>
+    </>
+  );
+};
+
+
 async function getData(url) {
   try {
     const response = await fetch(url);
@@ -222,6 +294,7 @@ export default function ToDoList() {
     // <Item name="Nope" isDone="false"/> // example of bad way to do what's done below 
     <>
             <Card>
+              <MongoDbForm/>
               <ReturnAngular/>
               <Avatar
                 size={100}
