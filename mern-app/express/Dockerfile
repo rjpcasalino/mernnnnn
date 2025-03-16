@@ -14,5 +14,6 @@ COPY . .
 # Expose port 8080 for the Express app to listen on
 EXPOSE 8080
 # Set the command to start the Express app
-CMD ["npm", "start"]
+# Don’t use synchronous functions
+CMD ["npm", "start", "--trace-sync-io"]
 

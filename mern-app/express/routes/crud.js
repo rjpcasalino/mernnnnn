@@ -5,6 +5,14 @@ var router = express.Router();
 const bodyParser = require('body-parser');
 const uri = process.env.MONGODB_URI || 'mongodb://localhost:27017';
 
+// middleware that is specific to this router
+const myLogger = function (req, res, next) {
+  console.log('LOGGED')
+  next()
+}
+
+//router.use(myLogger)
+
 router.get('/', function(req, res) {
   const { dbq, id } = req.query;
   if (!dbq  || !id ) return res.status(400).send({ message: 'Invalid request' });
@@ -12,7 +20,6 @@ router.get('/', function(req, res) {
   const client = new MongoClient(uri);
   async function run() {
     try {
-      console.debug("Trying to find....");
       const database = client.db(dbq);
       let collection = database.collection(id);
       let results = await collection.find({})
@@ -23,7 +30,6 @@ router.get('/', function(req, res) {
     } finally {
       // Ensures that the client will close when you finish/error
       await client.close();
-      console.debug("Done.");
     }
   }
   run().catch(console.dir);
@@ -41,7 +47,6 @@ router.post('/', (req, res) => {
 
       async function run() {
         try {
-          console.debug("Trying insert....");
           const database = client.db(dbq);
           const collection = database.collection(id);
           const myobj = { data: data };
@@ -50,7 +55,6 @@ router.post('/', (req, res) => {
         } finally {
           // Ensures that the client will close when you finish/error
           await client.close();
-          console.debug("Done.");
         }
       }
       run().catch(console.dir);
