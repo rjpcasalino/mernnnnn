@@ -5,7 +5,7 @@ function ChatInterface() {
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://[::1]:8080';
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
 
   // Handle text input change
   const handleTextChange = (e) => {

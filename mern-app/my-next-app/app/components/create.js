@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Create() {
- const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://[::1]:8080';
+ const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
  const [form, setForm] = useState({
    name: "",
    position: "",
@@ -22,8 +22,7 @@ export default function Create() {
    // When a post request is sent to the create url, we'll add a new record to the database.
    const newPerson = { ...form };
  
-   await fetch(`${backendUrl}/chat/
-    record`, {
+   await fetch(`${backendUrl}/chat/record`, {
      method: "POST",
      headers: {
        "Content-Type": "application/json",

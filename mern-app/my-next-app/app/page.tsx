@@ -22,7 +22,7 @@ const MongoDbForm = () => {
     if (!id || !movie) return alert('Please fill all fields');
 
     try {
-      const response = await fetch(`http://[::1]:8080/crud`, {
+      const response = await fetch(`http://localhost:8080/crud`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, movie }),
@@ -106,7 +106,7 @@ function Counter() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const url = `http://[::1]:8080/crud?dbq=test&id=movies`;
+      const url = `http://localhost:8080/crud?dbq=test&id=movies`;
       const json = await getData(url);
       if (json) {
         setData(json);
@@ -118,7 +118,7 @@ function Counter() {
   const handleAddBluth = async (event) => {
     event.preventDefault();
     try {
-      const url = `http://[::1]:8080/crud`;
+      const url = `http://localhost:8080/crud`;
       const randomName = [
         "George Bluth Sr.",
         "Lucille Bluth",
@@ -157,7 +157,7 @@ function Counter() {
 
 
   const handleButtonClick = async () => {
-    const newUrl = `http://[::1]:8080/crud?dbq=test&id=movies&data=""`;
+    const newUrl = `http://localhost:8080/crud?dbq=test&id=movies&data=""`;
     try {
       const response = await fetch(newUrl);
       if (!response.ok) {
