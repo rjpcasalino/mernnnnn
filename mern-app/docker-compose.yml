@@ -1,18 +1,4 @@
 services:
-  ollama:
-    image: ollama/ollama:latest
-    ports:
-      - 11434:11434
-    volumes:
-      - .:/code
-      - ./ollama/ollama:/root/.ollama
-    container_name: ollama
-    pull_policy: always
-    tty: true
-    restart: always
-    networks: 
-      - ip6net
-
   next:
     build: ./my-next-app
     depends_on:
@@ -23,8 +9,8 @@ services:
       MONGODB_URI: "mongodb://root:example@mongo:27017/"
       REACT_APP_BACKEND_URL: "http://[::1]:8080"
 
-    networks: 
-      - ip6net
+    network_mode: host 
+
     ports:
       - "3000:3000"
     
@@ -43,8 +29,8 @@ services:
       - DEBUG=app:*
       - PORT=8080
 
-    networks: 
-    - ip6net
+    network_mode: host 
+
     ports:
       - "8080:8080"
   mongo:
@@ -54,8 +40,8 @@ services:
       MONGODB_INITDB_ROOT_USERNAME: root
       MONGODB_INITDB_ROOT_PASSWORD: example
 
-    networks: 
-      - ip6net
+    network_mode: host 
+
     ports:
       - "27017:27017"
 

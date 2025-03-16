@@ -93,7 +93,7 @@ router.post("/chatter", async (req, res) => {
     // Send the request to the Gemma 2:2b model
     const axiosResponse = await axios({
       method: "post",
-      url: "http://[::1]:11434/api/generate",
+      url: "http://localhost:11434/api/generate",
       data: {
         model: "gemma2:2b",
         prompt: augmentedPrompt,
