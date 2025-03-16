@@ -27,6 +27,8 @@ function BasicExample() {
             <Nav.Link as={Link} href="/">Home</Nav.Link>
             <Nav.Link as={Link} href="/hello">Hello</Nav.Link>
             <Nav.Link as={Link} href="/todos">Todos</Nav.Link>
+            <Nav.Link as={Link} href="/pagez">github.com/twbs/examples/tree/main/react-nextjs</Nav.Link>
+
                 
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
