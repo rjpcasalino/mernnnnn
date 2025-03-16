@@ -180,7 +180,7 @@ function Counter() {
       <Button variant="primary" onClick={handleButtonClick}>You clicked me {count} times</Button>
 
       {data && data.ExpressResponse.map(movie => (
-        <li key={self.crypto.randomUUID()}>{movie.data}</li>
+        <li key={self.crypto.randomUUID()}>{movie.movie}</li>
       ))}
       <form onSubmit={handleAddMovie}>
         <Button variant="secondary" type="submit">Add Movie</Button>

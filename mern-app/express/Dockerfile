@@ -15,5 +15,5 @@ COPY . .
 EXPOSE 8080
 # Set the command to start the Express app
 # Don’t use synchronous functions
-CMD ["npm", "start", "--trace-sync-io"]
+CMD ["npm", "start", "--trace-sync-io", "--experimental-print-required-tla"]
 
