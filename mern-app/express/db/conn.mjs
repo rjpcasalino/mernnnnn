@@ -11,6 +11,6 @@ try {
   console.error(e);
 }
 
-let db = conn.db("movies");
+let db = conn.db("test");
 
 export default db;

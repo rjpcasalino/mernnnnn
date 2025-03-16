@@ -4,7 +4,6 @@ import { ObjectId } from "mongodb";
 
 
 var router = express.Router();
-import bodyParser from "body-parser";
 const uri = process.env.MONGODB_URI;
 
 // middleware that is specific to this router
@@ -24,6 +23,8 @@ const myLogger = function (req, res, next) {
 
 router.use(myLogger);
 router.use(corsMiddleware);
+
+// end middleware
 
 // This section will help you get a list of all the records.
 router.get("/", async (req, res) => {
