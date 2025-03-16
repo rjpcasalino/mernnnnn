@@ -7,52 +7,36 @@ import { useState, useEffect } from "react";
 
 import Button from 'react-bootstrap/Button';
 
-
 import { Container, Form } from 'react-bootstrap';
 
+import ChatInterface from './components/chat';
+
+import Create from './components/create';
+
 const MongoDbForm = () => {
-  const [dbq, setDbq] = useState('');
   const [id, setId] = useState('');
-  const [data, setData] = useState('');
+  const [movie, setMovie] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (!dbq || !id || !data) return alert('Please fill all fields');
+    if (!id || !movie) return alert('Please fill all fields');
 
     try {
       const response = await fetch(`http://[::1]:8080/crud`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ dbq, id, data }),
+        body: JSON.stringify({ id, movie }),
       });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      } else {
-        throw new Error('Network request failed');
-      }
     } catch (error) {
-      console.error(error);
+      throw new Error(error);
     }
   };
   return (
     <>
     <Container className="mt-5">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="dbq">
-          <Form.Label> DBQ</Form.Label>
-          <Form.Control
-            type="text"
-            value={dbq}
-            onChange={(event) => setDbq(event.target.value)}
-            placeholder="DBQ"
-          />
-        </Form.Group>
-
-
         <Form.Group controlId="id">
-          <Form.Label> ID</Form.Label>
+          <Form.Label>ID (datebase)</Form.Label>
           <Form.Control
             type="text"
             value={id}
@@ -61,13 +45,13 @@ const MongoDbForm = () => {
           />
         </Form.Group>
 
-        <Form.Group controlId="data">
-          <Form.Label> Data</Form.Label>
+        <Form.Group controlId="movie">
+          <Form.Label>Movie Title:</Form.Label>
           <Form.Control
             type="text"
-            value={data}
-            onChange={(event) => setData(event.target.value)}
-            placeholder="Data"
+            value={movie}
+            onChange={(event) => setMovie(event.target.value)}
+            placeholder="Toy Story"
           />
         </Form.Group>
         <Button variant="primary" type="submit">
@@ -131,20 +115,33 @@ function Counter() {
     fetchData();
   }, []);
 
-  const handleAddMovie = async (event) => {
+  const handleAddBluth = async (event) => {
     event.preventDefault();
     try {
       const url = `http://[::1]:8080/crud`;
+      const randomName = [
+        "George Bluth Sr.",
+        "Lucille Bluth",
+        "Michael Bluth",
+        "Gob Bluth",
+        "Lindsay Bluth Fünke",
+        "Buster Bluth",
+        "Tobias Fünke",
+        "Mister F",
+        "Retarded",
+        "N elly Bluth"
+      ];
+      
+      const body = JSON.stringify({
+        id: 'movies',
+        movie: `${randomName[Math.floor(Math.random() * randomName.length)]}`,
+      });
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          dbq: 'test',
-          id: 'movies',
-          data: 'New Movie Title!'
-        })
+        body: body,
       });
 
       if (!response.ok) {
@@ -178,12 +175,11 @@ function Counter() {
   return (
     <div>
       <Button variant="primary" onClick={handleButtonClick}>You clicked me {count} times</Button>
-
       {data && data.ExpressResponse.map(movie => (
         <li key={self.crypto.randomUUID()}>{movie.movie}</li>
       ))}
-      <form onSubmit={handleAddMovie}>
-        <Button variant="secondary" type="submit">Add Movie</Button>
+      <form onSubmit={handleAddBluth}>
+        <Button variant="secondary" type="submit">Add Bluth</Button>
       </form>
 
     </div>
@@ -294,6 +290,8 @@ export default function ToDoList() {
     // <Item name="Nope" isDone="false"/> // example of bad way to do what's done below 
     <>
             <Card>
+              <Create/>
+              <ChatInterface/>
               <MongoDbForm/>
               <ReturnAngular/>
               <Avatar

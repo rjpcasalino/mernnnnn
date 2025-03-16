@@ -1,4 +1,18 @@
 services:
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - 11434:11434
+    volumes:
+      - .:/code
+      - ./ollama/ollama:/root/.ollama
+    container_name: ollama
+    pull_policy: always
+    tty: true
+    restart: always
+    networks: 
+      - ip6net
+
   next:
     build: ./my-next-app
     depends_on:
@@ -7,7 +21,7 @@ services:
       PORT: 3000
       NODE_ENV: "development"
       MONGODB_URI: "mongodb://root:example@mongo:27017/"
-      REACT_APP_BACKEND_URL: ""
+      REACT_APP_BACKEND_URL: "http://[::1]:8080"
 
     networks: 
       - ip6net
@@ -33,7 +47,6 @@ services:
     - ip6net
     ports:
       - "8080:8080"
-
   mongo:
     build: ./mongo
     restart: always
@@ -55,4 +68,3 @@ networks:
      ipam:
        config:
          - subnet: 2001:db8::/64
-

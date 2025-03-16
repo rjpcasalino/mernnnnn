@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 // This section will help you create a new record.
 router.post("/", async (req, res) => {
   let newDocument = {
-    movie: req.body.data,
+    movie: req.body.movie,
   };
   let collection = await db.collection(req.body.id);
   let result = await collection.insertOne(newDocument);

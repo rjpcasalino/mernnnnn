@@ -33,7 +33,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // This section will help you create a new record.
-router.post("/", async (req, res) => {
+router.post("/record", async (req, res) => {
   let newDocument = {
     name: req.body.name,
     position: req.body.position,
@@ -71,7 +71,7 @@ router.delete("/:id", async (req, res) => {
   res.send(result).status(200);
 });
 
-router.post("/chat", async (req, res) => {
+router.post("/chatter", async (req, res) => {
   const userMessage = req.body.content || "Please provide a message.";
 
   // Set headers for SSE (Server-Sent Events)
@@ -93,7 +93,7 @@ router.post("/chat", async (req, res) => {
     // Send the request to the Gemma 2:2b model
     const axiosResponse = await axios({
       method: "post",
-      url: "http://localhost:11434/api/generate",
+      url: "http://[::1]:11434/api/generate",
       data: {
         model: "gemma2:2b",
         prompt: augmentedPrompt,

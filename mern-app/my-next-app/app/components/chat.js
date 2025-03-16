@@ -5,7 +5,7 @@ function ChatInterface() {
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://[::1]:8080';
 
   // Handle text input change
   const handleTextChange = (e) => {
@@ -19,7 +19,7 @@ function ChatInterface() {
       setResult(''); // Clear previous result
 
       try {
-        const response = await fetch(`${backendUrl}/record/chat`, {
+        const response = await fetch(`${backendUrl}/chat/chatter`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
