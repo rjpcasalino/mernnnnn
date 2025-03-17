@@ -6,8 +6,8 @@ services:
     environment:
       PORT: 3000
       NODE_ENV: "development"
-      MONGODB_URI: "mongodb://root:example@mongo:27017/"
-      REACT_APP_BACKEND_URL: "http://[::1]:8080"
+      MONGODB_URI: "mongodb://root:example@localhost:27017"
+      REACT_APP_BACKEND_URL: "http://localhost:8080"
 
     network_mode: host 
 
@@ -25,7 +25,7 @@ services:
     depends_on:
       - mongo
     environment:
-      - MONGODB_URI=mongodb://root:example@mongo:27017/
+      - MONGODB_URI=mongodb://root:example@localhost:27017
       - DEBUG=app:*
       - PORT=8080
 
